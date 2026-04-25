@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "electron-vite dev",
     "build": "electron-vite build",
-    "preview": "electron-vite preview"
+    "preview": "electron-vite preview",
+    "package": "electron-builder build && electron-builder"
   },
   "dependencies": {
     "dotenv": "^16.4.5",
