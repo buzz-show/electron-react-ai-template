@@ -14,7 +14,10 @@ function getOpenAI(): OpenAI {
         'OPENAI_API_KEY 未设置。请将 .env.example 复制为 .env 并填入你的 API Key。'
       )
     }
-    openai = new OpenAI({ apiKey })
+    if (process.env['OPENAI_API_BASE_URL']) {
+      console.log('Using custom OpenAI API base URL:', process.env['OPENAI_API_BASE_URL'])
+    }
+    openai = new OpenAI({ apiKey, baseURL: process.env['OPENAI_API_BASE_URL'] }) // 可选：支持自定义 API 服务器地址
   }
   return openai
 }
@@ -31,15 +34,17 @@ export function registerIpcHandlers(): void {
     try {
       const client = getOpenAI()
       const stream = await client.chat.completions.create({
-        model: 'gpt-4o-mini',
+        model: 'qwen3.5-35b-a3b',
         messages,
         stream: true
       })
 
       for await (const chunk of stream) {
+        console.log('Received chunk:', chunk)
         const delta = chunk.choices[0]?.delta?.content ?? ''
         if (delta) event.sender.send('chat:stream:chunk', delta)
       }
+
 
       event.sender.send('chat:stream:done')
     } catch (err) {

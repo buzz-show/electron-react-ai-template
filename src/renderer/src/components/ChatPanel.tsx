@@ -11,7 +11,7 @@ export default function ChatPanel() {
         <div className="flex items-center gap-2.5">
           <span className="text-base font-semibold tracking-tight">Electron AI Chat</span>
           <span className="text-xs text-gray-500 bg-gray-800 px-2 py-0.5 rounded-full">
-            GPT-4o-mini
+            qwen3.5-35b-a3b
           </span>
         </div>
         <button

@@ -37,8 +37,22 @@ function createWindow(): void {
   } else {
     mainWindow.loadFile(join(__dirname, '../renderer/index.html'))
   }
+
+  // F12 / Ctrl+Shift+I (Win/Linux) / Cmd+Option+I (macOS) 打开/关闭开发者工具
+  mainWindow.webContents.on('before-input-event', (event, input) => {
+    const isDevToolsShortcut =
+      input.key === 'F12' ||
+      (input.control && input.shift && input.key === 'I') ||
+      (input.meta && input.alt && input.key === 'I')
+    if (isDevToolsShortcut) {
+      mainWindow.webContents.toggleDevTools()
+      event.preventDefault()
+    }
+  })
 }
 
+// app.whenReady() 是 Electron 应用的初始化完成阶段的生命钩子。触发时机：主进程启动，地层chromium环境初始化完毕
+// 在这个阶段resolve后，可以注册ipc处理器，创建窗口等操作。确保这些操作在Electron环境完全准备好后执行，避免潜在的错误和不稳定行为。
 app.whenReady().then(() => {
   registerIpcHandlers()
   createWindow()

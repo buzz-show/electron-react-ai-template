@@ -27,6 +27,7 @@ export const useChatStore = create<ChatStore>((set) => ({
     set((state) => {
       const msgs = [...state.messages]
       const last = msgs[msgs.length - 1]
+      console.log('Updating last assistant message with delta:', delta)
       if (last?.role === 'assistant') {
         msgs[msgs.length - 1] = { ...last, content: last.content + delta }
       }
