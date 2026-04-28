@@ -1,4 +1,5 @@
 import { useState, KeyboardEvent, useRef, useEffect } from 'react'
+
 import { useStreamChat } from '../hooks/useStreamChat'
 
 export default function InputBar() {

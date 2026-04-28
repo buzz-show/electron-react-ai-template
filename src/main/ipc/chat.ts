@@ -1,6 +1,7 @@
 import { ipcMain, IpcMainEvent } from 'electron'
 import OpenAI from 'openai'
 import { CHANNELS } from '@shared/constants/ipc-channels'
+
 import { runReActLoop } from '../ai/loop'
 
 type Messages = OpenAI.ChatCompletionMessageParam[]

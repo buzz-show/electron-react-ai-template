@@ -27,7 +27,7 @@ const execute = ({ expression }: Record<string, unknown>): string => {
     return '错误：表达式包含不允许的字符，只支持数字和 + - * / ( ) .'
   }
   try {
-    // eslint-disable-next-line no-new-func
+     
     const result = new Function(`"use strict"; return (${expr})`)()
     return String(result)
   } catch {

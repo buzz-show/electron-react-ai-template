@@ -1,5 +1,7 @@
 import { useEffect, useRef } from 'react'
+
 import { useChatStore } from '../store/chatStore'
+
 import MessageItem from './MessageItem'
 
 export default function MessageList() {

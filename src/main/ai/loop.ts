@@ -1,8 +1,10 @@
 import { IpcMainEvent } from 'electron'
 import OpenAI from 'openai'
 import { CHANNELS } from '@shared/constants/ipc-channels'
-import { getOpenAI } from './client'
+
 import { TOOL_DEFINITIONS, executeTool } from '../tools'
+
+import { getOpenAI } from './client'
 
 type Messages = OpenAI.ChatCompletionMessageParam[]
 

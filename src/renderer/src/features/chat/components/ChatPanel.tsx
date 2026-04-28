@@ -1,6 +1,7 @@
+import { useChatStore } from '../store/chatStore'
+
 import MessageList from './MessageList'
 import InputBar from './InputBar'
-import { useChatStore } from '../store/chatStore'
 
 export default function ChatPanel() {
   const { clearMessages } = useChatStore()

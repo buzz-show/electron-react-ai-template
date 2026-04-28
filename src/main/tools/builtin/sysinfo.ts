@@ -1,4 +1,5 @@
 import os from 'os'
+
 import type OpenAI from 'openai'
 
 const definition: OpenAI.ChatCompletionTool = {

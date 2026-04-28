@@ -1,6 +1,7 @@
 import ReactMarkdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
 import { Message } from '@shared/types'
+
 import ToolCallBubble from './ToolCallBubble'
 
 interface Props {

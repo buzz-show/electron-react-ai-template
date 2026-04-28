@@ -1,7 +1,10 @@
-import { app, shell, BrowserWindow } from 'electron'
 import { join } from 'path'
-import { config as dotenvConfig } from 'dotenv'
 import { resolve } from 'path'
+
+import { app, shell, BrowserWindow } from 'electron'
+import { config as dotenvConfig } from 'dotenv'
+
+
 import { registerAll } from './ipc/index'
 
 // 加载 .env 文件（开发环境）
