@@ -1,7 +1,4 @@
-# Electron + React + OpenAI 流式对话 Demo — 三天冲刺计划
-
-> 目标岗位：阿里云智能 - 高级 AI 前端工程师（桌面端/Agent 方向）
-> 计划日期：2026-04-25 ～ 2026-04-27
+# Electron + React + OpenAI 流式对话 Demo
 
 ---
 
