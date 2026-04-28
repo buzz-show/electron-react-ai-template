@@ -1,7 +1,7 @@
 {
-  "name": "electron-ai-demo",
+  "name": "electron-react-ai-template",
   "version": "1.0.0",
-  "description": "Electron + React + OpenAI 流式对话 Demo",
+  "description": "Electron + React + OpenAI 流式对话项目模板",
   "main": "./out/main/index.js",
   "author": "Buzz",
   "scripts": {
@@ -37,8 +37,8 @@
     ]
   },
   "build": {
-    "appId": "com.buzz.electron-ai-demo",
-    "productName": "Electron AI Demo",
+    "appId": "com.buzz.electron-react-ai-template",
+    "productName": "Electron React AI Template",
     "linux": {
       "target": [
         "AppImage"

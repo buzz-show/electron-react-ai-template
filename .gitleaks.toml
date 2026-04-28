@@ -1,7 +1,7 @@
 # Gitleaks 配置：AI 项目密钥泄露规则
 # 文档：https://github.com/gitleaks/gitleaks
 
-title = "electron-ai-demo gitleaks config"
+title = "electron-react-ai-template gitleaks config"
 
 # ── 扩展规则：AI 项目专属 ──────────────────────────────────
 
