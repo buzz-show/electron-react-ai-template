@@ -3,11 +3,12 @@
   "version": "1.0.0",
   "description": "Electron + React + OpenAI 流式对话 Demo",
   "main": "./out/main/index.js",
+  "author": "Buzz",
   "scripts": {
     "dev": "electron-vite dev",
     "build": "electron-vite build",
     "preview": "electron-vite preview",
-    "package": "electron-builder build && electron-builder"
+    "package": "electron-vite build && electron-builder"
   },
   "dependencies": {
     "dotenv": "^16.4.5",
@@ -17,6 +18,11 @@
     "react-markdown": "^9.0.1",
     "remark-gfm": "^4.0.0",
     "zustand": "^4.5.2"
+  },
+  "build": {
+    "linux": {
+      "target": ["AppImage"]
+    }
   },
   "devDependencies": {
     "@types/node": "^20.12.0",
