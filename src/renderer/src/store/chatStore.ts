@@ -1,11 +1,13 @@
 import { create } from 'zustand'
-import { Message } from '../types'
+import { Message, ToolCall } from '../types'
 
 interface ChatStore {
   messages: Message[]
   systemPrompt: string
   addMessage: (msg: Omit<Message, 'id'>) => void
   updateLastAssistantMessage: (delta: string) => void
+  appendToolCallToLast: (toolCalls: ToolCall[]) => void
+  updateToolCallResult: (id: string, result: string) => void
   clearMessages: () => void
   setSystemPrompt: (prompt: string) => void
 }
@@ -27,10 +29,34 @@ export const useChatStore = create<ChatStore>((set) => ({
     set((state) => {
       const msgs = [...state.messages]
       const last = msgs[msgs.length - 1]
-      console.log('Updating last assistant message with delta:', delta)
       if (last?.role === 'assistant') {
         msgs[msgs.length - 1] = { ...last, content: last.content + delta }
       }
+      return { messages: msgs }
+    }),
+
+  // 在最后一条 assistant 消息上挂载工具调用列表
+  appendToolCallToLast: (toolCalls) =>
+    set((state) => {
+      const msgs = [...state.messages]
+      const last = msgs[msgs.length - 1]
+      if (last?.role === 'assistant') {
+        msgs[msgs.length - 1] = {
+          ...last,
+          toolCalls: [...(last.toolCalls ?? []), ...toolCalls],
+        }
+      }
+      return { messages: msgs }
+    }),
+
+  // 通过 tool call id 找到对应条目并填入结果
+  updateToolCallResult: (id, result) =>
+    set((state) => {
+      const msgs = state.messages.map((msg) => {
+        if (!msg.toolCalls) return msg
+        const updated = msg.toolCalls.map((tc) => (tc.id === id ? { ...tc, result } : tc))
+        return { ...msg, toolCalls: updated }
+      })
       return { messages: msgs }
     }),
 

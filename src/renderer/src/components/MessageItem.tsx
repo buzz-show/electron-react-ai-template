@@ -1,6 +1,7 @@
 import ReactMarkdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
 import { Message } from '../types'
+import ToolCallBubble from './ToolCallBubble'
 
 interface Props {
   message: Message
@@ -26,7 +27,8 @@ export default function MessageItem({ message }: Props) {
         {isUser ? (
           <p className="whitespace-pre-wrap">{message.content}</p>
         ) : (
-          <ReactMarkdown
+          <>
+            <ReactMarkdown
             remarkPlugins={[remarkGfm]}
             components={{
               pre({ children }) {
@@ -64,6 +66,10 @@ export default function MessageItem({ message }: Props) {
           >
             {message.content || '\u25ae'}
           </ReactMarkdown>
+          {message.toolCalls && message.toolCalls.length > 0 && (
+            <ToolCallBubble toolCalls={message.toolCalls} />
+          )}
+          </>
         )}
       </div>
     </div>

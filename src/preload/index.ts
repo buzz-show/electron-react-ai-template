@@ -29,5 +29,17 @@ contextBridge.exposeInMainWorld('electronAPI', {
     const handler = (_: IpcRendererEvent, message: string): void => cb(message)
     ipcRenderer.once('chat:stream:error', handler)
     return () => ipcRenderer.removeListener('chat:stream:error', handler)
-  }
+  },
+
+  onToolCall: (cb: (payload: { id: string; name: string; args: Record<string, unknown> }) => void): (() => void) => {
+    const handler = (_: IpcRendererEvent, payload: { id: string; name: string; args: Record<string, unknown> }): void => cb(payload)
+    ipcRenderer.on('chat:stream:tool-call', handler)
+    return () => ipcRenderer.removeListener('chat:stream:tool-call', handler)
+  },
+
+  onToolResult: (cb: (payload: { id: string; result: string }) => void): (() => void) => {
+    const handler = (_: IpcRendererEvent, payload: { id: string; result: string }): void => cb(payload)
+    ipcRenderer.on('chat:stream:tool-result', handler)
+    return () => ipcRenderer.removeListener('chat:stream:tool-result', handler)
+  },
 })

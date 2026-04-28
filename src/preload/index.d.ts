@@ -6,6 +6,8 @@ export interface ElectronAPI {
   onChunk: (cb: (delta: string) => void) => () => void
   onDone: (cb: () => void) => () => void
   onError: (cb: (message: string) => void) => () => void
+  onToolCall: (cb: (payload: { id: string; name: string; args: Record<string, unknown> }) => void) => () => void
+  onToolResult: (cb: (payload: { id: string; result: string }) => void) => () => void
 }
 
 declare global {

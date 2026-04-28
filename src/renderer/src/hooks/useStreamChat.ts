@@ -3,7 +3,14 @@ import { useChatStore } from '../store/chatStore'
 
 export function useStreamChat() {
   const [streaming, setStreaming] = useState(false)
-  const { addMessage, updateLastAssistantMessage, messages, systemPrompt } = useChatStore()
+  const {
+    addMessage,
+    updateLastAssistantMessage,
+    appendToolCallToLast,
+    updateToolCallResult,
+    messages,
+    systemPrompt,
+  } = useChatStore()
   // 保存所有监听器的清理函数，防止内存泄漏
   const cleanupRef = useRef<(() => void)[]>([])
 
@@ -34,7 +41,15 @@ export function useStreamChat() {
         cleanupRef.current = []
       })
 
-      cleanupRef.current = [offChunk, offDone, offError]
+      const offToolCall = window.electronAPI.onToolCall(({ id, name, args }) => {
+        appendToolCallToLast([{ id, name, args }])
+      })
+
+      const offToolResult = window.electronAPI.onToolResult(({ id, result }) => {
+        updateToolCallResult(id, result)
+      })
+
+      cleanupRef.current = [offChunk, offDone, offError, offToolCall, offToolResult]
 
       // 3. 发送请求：system prompt + 历史上下文（不含刚 add 的两条） + 当前输入
       window.electronAPI.startStream([
@@ -43,7 +58,7 @@ export function useStreamChat() {
         { role: 'user', content: userInput }
       ])
     },
-    [messages, systemPrompt, streaming, addMessage, updateLastAssistantMessage]
+    [messages, systemPrompt, streaming, addMessage, updateLastAssistantMessage, appendToolCallToLast, updateToolCallResult]
   )
 
   return { sendMessage, streaming }
