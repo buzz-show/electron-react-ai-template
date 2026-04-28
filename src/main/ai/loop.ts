@@ -64,7 +64,7 @@ export async function runReActLoop(event: IpcMainEvent, messages: Messages): Pro
       messages.push({
         role: 'assistant',
         content: null,
-        tool_calls: toolCalls.map((tc) => ({
+        tool_calls: toolCalls.map(tc => ({
           id: tc.id,
           type: 'function' as const,
           function: { name: tc.name, arguments: tc.argsJson },
@@ -74,7 +74,11 @@ export async function runReActLoop(event: IpcMainEvent, messages: Messages): Pro
       // 逐一执行工具，推送通知，追加 tool role 消息
       for (const tc of toolCalls) {
         let args: Record<string, unknown> = {}
-        try { args = JSON.parse(tc.argsJson || '{}') } catch { /* 保持空对象 */ }
+        try {
+          args = JSON.parse(tc.argsJson || '{}')
+        } catch {
+          /* 保持空对象 */
+        }
 
         event.sender.send(CHANNELS.CHAT_TOOL_CALL, { id: tc.id, name: tc.name, args })
         const result = executeTool(tc.name, args)

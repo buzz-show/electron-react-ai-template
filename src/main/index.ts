@@ -4,7 +4,6 @@ import { resolve } from 'path'
 import { app, shell, BrowserWindow } from 'electron'
 import { config as dotenvConfig } from 'dotenv'
 
-
 import { registerAll } from './ipc/index'
 
 // 加载 .env 文件（开发环境）
@@ -20,10 +19,10 @@ function createWindow(): void {
     autoHideMenuBar: true,
     webPreferences: {
       preload: join(__dirname, '../preload/index.js'),
-      contextIsolation: true,  // renderer 无法访问 Node.js API
-      nodeIntegration: false,  // 禁止 renderer 直接使用 Node.js
-      sandbox: false
-    }
+      contextIsolation: true, // renderer 无法访问 Node.js API
+      nodeIntegration: false, // 禁止 renderer 直接使用 Node.js
+      sandbox: false,
+    },
   })
 
   mainWindow.on('ready-to-show', () => mainWindow.show())

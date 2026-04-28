@@ -34,7 +34,7 @@ export default function InputBar() {
         <textarea
           ref={textareaRef}
           value={input}
-          onChange={(e) => setInput(e.target.value)}
+          onChange={e => setInput(e.target.value)}
           onKeyDown={handleKeyDown}
           placeholder={streaming ? '正在生成回复…' : '输入消息，Enter 发送，Shift+Enter 换行'}
           disabled={streaming}

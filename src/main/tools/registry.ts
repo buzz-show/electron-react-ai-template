@@ -23,5 +23,5 @@ export const TOOL_REGISTRY: Record<string, ToolHandler> = {
 
 /** 传给 OpenAI chat.completions.create 的 tools 参数 */
 export const TOOL_DEFINITIONS: OpenAI.ChatCompletionTool[] = Object.values(TOOL_REGISTRY).map(
-  (h) => h.definition
+  h => h.definition
 )

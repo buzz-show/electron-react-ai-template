@@ -3,6 +3,7 @@ import tsPlugin from '@typescript-eslint/eslint-plugin'
 import reactPlugin from 'eslint-plugin-react'
 import reactHooksPlugin from 'eslint-plugin-react-hooks'
 import importPlugin from 'eslint-plugin-import'
+import prettierConfig from 'eslint-config-prettier'
 
 /** @type {import('eslint').Linter.Config[]} */
 export default [
@@ -101,4 +102,9 @@ export default [
       'no-console': 'warn', // 渲染进程 console 给警告提醒
     },
   },
+
+  // ── Prettier 兼容层（必须放最后）─────────────────────────
+  // 关闭 ESLint 中所有与格式相关的规则，把格式全权交给 Prettier
+  // 放最后是因为 ESLint 配置数组后面的规则会覆盖前面的
+  prettierConfig,
 ]

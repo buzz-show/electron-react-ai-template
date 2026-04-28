@@ -22,18 +22,18 @@ export function useStreamChat() {
       addMessage({ role: 'assistant', content: '' })
       setStreaming(true)
 
-      const offChunk = window.electronAPI.onChunk((delta) => {
+      const offChunk = window.electronAPI.onChunk(delta => {
         updateLastAssistantMessage(delta)
       })
       const offDone = window.electronAPI.onDone(() => {
         setStreaming(false)
-        cleanupRef.current.forEach((fn) => fn())
+        cleanupRef.current.forEach(fn => fn())
         cleanupRef.current = []
       })
-      const offError = window.electronAPI.onError((msg) => {
+      const offError = window.electronAPI.onError(msg => {
         updateLastAssistantMessage(`\n\n> **错误：** ${msg}`)
         setStreaming(false)
-        cleanupRef.current.forEach((fn) => fn())
+        cleanupRef.current.forEach(fn => fn())
         cleanupRef.current = []
       })
       const offToolCall = window.electronAPI.onToolCall(({ id, name, args }) => {

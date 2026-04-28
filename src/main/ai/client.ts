@@ -12,9 +12,7 @@ export function getOpenAI(): OpenAI {
   if (!client) {
     const apiKey = process.env['OPENAI_API_KEY']
     if (!apiKey) {
-      throw new Error(
-        'OPENAI_API_KEY 未设置。请将 .env.example 复制为 .env 并填入你的 API Key。'
-      )
+      throw new Error('OPENAI_API_KEY 未设置。请将 .env.example 复制为 .env 并填入你的 API Key。')
     }
     const baseURL = process.env['OPENAI_API_BASE_URL']
     if (baseURL) console.log('Using custom OpenAI base URL:', baseURL)

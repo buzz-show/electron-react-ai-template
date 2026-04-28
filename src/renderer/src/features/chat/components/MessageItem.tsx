@@ -41,7 +41,9 @@ export default function MessageItem({ message }: Props) {
                 },
                 code({ className, children }) {
                   return (
-                    <code className={`bg-gray-950 px-1.5 py-0.5 rounded text-xs font-mono ${className ?? ''}`}>
+                    <code
+                      className={`bg-gray-950 px-1.5 py-0.5 rounded text-xs font-mono ${className ?? ''}`}
+                    >
                       {children}
                     </code>
                   )
@@ -60,7 +62,7 @@ export default function MessageItem({ message }: Props) {
                     <a
                       href={href}
                       className="text-indigo-400 underline"
-                      onClick={(e) => e.preventDefault()}
+                      onClick={e => e.preventDefault()}
                     >
                       {children}
                     </a>

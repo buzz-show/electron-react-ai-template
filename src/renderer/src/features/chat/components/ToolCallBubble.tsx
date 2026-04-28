@@ -19,7 +19,7 @@ function ToolCallCard({ tc }: { tc: ToolCall }) {
   return (
     <div className="rounded-lg border border-amber-800/40 bg-amber-950/30 text-xs overflow-hidden">
       <button
-        onClick={() => setExpanded((prev) => !prev)}
+        onClick={() => setExpanded(prev => !prev)}
         className="w-full flex items-center gap-2 px-3 py-2 text-left hover:bg-amber-900/20 transition-colors"
       >
         <span>{icon}</span>
@@ -61,7 +61,7 @@ function ToolCallCard({ tc }: { tc: ToolCall }) {
 export default function ToolCallBubble({ toolCalls }: Props) {
   return (
     <div className="mt-2 flex flex-col gap-1.5">
-      {toolCalls.map((tc) => (
+      {toolCalls.map(tc => (
         <ToolCallCard key={tc.id} tc={tc} />
       ))}
     </div>
