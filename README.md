@@ -78,7 +78,7 @@ npm install
 在项目根目录创建 `.env` 文件：
 
 ```env
-OPENAI_API_KEY=sk-xxxxxxxxxxxxxxxx
+OPENAI_API_KEY=your_openai_api_key_here
 # 可选，默认使用 gpt-4o-mini
 OPENAI_MODEL=gpt-4o-mini
 ```
