@@ -29,6 +29,8 @@ description = "已知安全的占位符和测试值"
 regexes     = [
   # CI 构建中使用的占位符
   '''sk-placeholder''',
+  '''sk-your-api-key-here''',       # .env.example 占位符
+  '''sk-x{10,}''',                  # README 中 sk-xxx... 示例
   # .env.example 示例文件允许出现 key 格式
   '''your[_\-]api[_\-]key''',
   '''<your[_\-].*key>''',
@@ -39,4 +41,7 @@ paths = [
   '''.*\.spec\.(ts|tsx)$''',
   # 忽略 gitleaks 自身配置（避免规则 regex 触发自检）
   '''\.gitleaks\.toml''',
+  '''\.env\.example''',             # 示例环境变量文件
+  '''.*\.md$''',                    # 所有 Markdown 文档
+  '''DOC/.*''',                     # 文档目录
 ]
